@@ -1,0 +1,6 @@
+Param
+(
+	[Parameter(Mandatory=$true)] [string]$var_printer_name
+)
+$printer = Get-CimInstance -Class Win32_Printer -Filter "Name=""$var_printer_name"""
+Invoke-CimMethod -InputObject $printer -MethodName SetDefaultPrinter
