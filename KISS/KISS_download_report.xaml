@@ -2,9 +2,11 @@
   <x:Members>
     <x:Property Name="out_is_report_saved" Type="OutArgument(x:Boolean)" />
     <x:Property Name="out_is_no_data_export" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="out_filename_full_path" Type="OutArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>985,982</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>947,1542</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -75,17 +77,14 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Download report in excel format, when there is no report to download set flag accordignly" DisplayName="KISS_download_report" sap:VirtualizedContainerService.HintSize="526,817" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Download report in excel format, when there is no report to download set flag accordignly" DisplayName="KISS_download_report" sap:VirtualizedContainerService.HintSize="604,1377" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="favorit_name" Name="var_report_name" />
       <Variable x:TypeArguments="x:String" Name="var_timestamp" />
       <Variable x:TypeArguments="x:String" Default=".xlsx" Name="var_excel_extension" />
       <Variable x:TypeArguments="x:String" Name="var_report_full_filename_path" />
-      <Variable x:TypeArguments="x:String" Name="var_report_root_folder">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">C:\Users\CabarcasJoh\Pictures\Camera Roll\</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="C:\Users\CabarcasJoh\Pictures\Camera Roll\" Name="var_report_root_folder" />
+      <Variable x:TypeArguments="x:String" Name="var_bot_username" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -93,20 +92,44 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Select export icon and export table to excel" BrowserType="Chrome" DisplayName="Attach Browser | KISS Favorit table" sap:VirtualizedContainerService.HintSize="484,411" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f6f03da7890fcf62c376d2ebcb7ffaf2" Selector="&lt;html app='chrome.exe' title='BSI CRM - KISS svc_bot_kiss01 *** 3.1.56.001 TEST ***' /&gt;">
+    <Assign DisplayName="Assign | Bot user name" sap:VirtualizedContainerService.HintSize="562,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">var_bot_username</mca:CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">in_Config["kKissUsername"].ToString()</mca:CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign | report root folder path" sap:VirtualizedContainerService.HintSize="562,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">var_report_root_folder</mca:CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">in_Config["kPathReportFolder"].ToString()</mca:CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Select export icon and export table to excel" BrowserType="Chrome" DisplayName="Attach Browser | KISS Favorit table" sap:VirtualizedContainerService.HintSize="562,96" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f6f03da7890fcf62c376d2ebcb7ffaf2">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do | Select export table" sap:VirtualizedContainerService.HintSize="242,234" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do | Select export table" sap:VirtualizedContainerService.HintSize="476,704" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" DisplayName="On Element Appear | Export icon" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False" WaitActive="False" WaitVisible="True">
+            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" DisplayName="On Element Appear | Export icon" sap:VirtualizedContainerService.HintSize="434,520" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False" WaitActive="False" WaitVisible="True">
               <ui:OnUiElementAppear.Body>
                 <Sequence DisplayName="Do | Export to excel" sap:VirtualizedContainerService.HintSize="376,344" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
@@ -159,12 +182,12 @@
               </ui:OnUiElementAppear.Target>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:OnUiElementAppear>
-            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitActive="{x:Null}" DisplayName="On Element Appear | No data for export" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_2" WaitVisible="True">
+            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitActive="{x:Null}" DisplayName="On Element Appear | No data for export" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_2" RepeatForever="False" WaitVisible="True">
               <ui:OnUiElementAppear.Body>
                 <Sequence DisplayName="Do | pop-up click" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
@@ -207,9 +230,6 @@
                   </Assign>
                 </Sequence>
               </ui:OnUiElementAppear.Body>
-              <ui:OnUiElementAppear.RepeatForever>
-                <Literal x:TypeArguments="x:Boolean" />
-              </ui:OnUiElementAppear.RepeatForever>
               <ui:OnUiElementAppear.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9fd971a8-f38c-4f08-9153-aee0158225de" InformativeScreenshot="a905480c6854a76e63668eb05ca9c3a3" Selector="&lt;webctrl tag='DIV' class='messagebox-content' innertext='Export nicht möglich, da keine Daten vorhanden sind.' /&gt;" TimeoutMS="3000" WaitForReady="COMPLETE" />
               </ui:OnUiElementAppear.Target>
@@ -223,36 +243,44 @@
           </Sequence>
         </ActivityAction>
       </ui:BrowserScope.Body>
+      <ui:BrowserScope.Selector>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">String.Format("&lt;html app='chrome.exe' title='BSI CRM - KISS {0}*' /&gt;", var_bot_username)</mca:CSharpValue>
+        </InArgument>
+      </ui:BrowserScope.Selector>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:BrowserScope>
-    <If DisplayName="if | No export possible" sap:VirtualizedContainerService.HintSize="484,243" sap2010:WorkflowViewState.IdRef="If_1">
+    <If DisplayName="if | No export possible" sap:VirtualizedContainerService.HintSize="562,918" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
           <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">out_is_no_data_export != true</mca:CSharpValue>
         </InArgument>
       </If.Condition>
       <If.Then>
-        <Sequence DisplayName="Sequence | Save report locally" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Sequence | Save report locally" sap:VirtualizedContainerService.HintSize="526,738" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Boolean" Name="var_is_report_saved" />
+          </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke DateTime_generate_timestamp workflow" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="DateTime\\DateTime_generate_timestamp.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke DateTime_generate_timestamp workflow" sap:VirtualizedContainerService.HintSize="484,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="DateTime\\DateTime_generate_timestamp.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <OutArgument x:TypeArguments="x:String" x:Key="out_timestamp">
                 <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">var_timestamp</mca:CSharpReference>
               </OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <Assign DisplayName="Assign | Full report name path " sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign DisplayName="Assign | Full report name path " sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">
                 <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">var_report_full_filename_path</mca:CSharpReference>
@@ -264,14 +292,23 @@
               </InArgument>
             </Assign.Value>
           </Assign>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Window_save_doc workflow" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Window\\Window_save_doc.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Window_save_doc workflow" sap:VirtualizedContainerService.HintSize="484,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Window\\Window_save_doc.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_file_full_name">
                 <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">var_report_full_filename_path</mca:CSharpValue>
               </InArgument>
-              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_is_file_saved" />
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_is_file_saved">
+                <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">var_is_report_saved</mca:CSharpReference>
+              </OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
+          <If DisplayName="If | report saved" sap:VirtualizedContainerService.HintSize="484,240" sap2010:WorkflowViewState.IdRef="If_2">
+            <If.Condition>
+              <InArgument x:TypeArguments="x:Boolean">
+                <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">var_is_report_saved</mca:CSharpValue>
+              </InArgument>
+            </If.Condition>
+          </If>
         </Sequence>
       </If.Then>
     </If>
