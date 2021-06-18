@@ -3,7 +3,7 @@
     <x:Property Name="out_is_table_empty" Type="OutArgument(x:Boolean)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>985,2939</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1186,1604</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -74,13 +74,14 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Select and download document whithin the given favorit and path" DisplayName="KISS_select_doc" sap:VirtualizedContainerService.HintSize="825,2774" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Select and download document whithin the given favorit and local storage path" DisplayName="KISS_select_doc" sap:VirtualizedContainerService.HintSize="750,1439" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="test2" Name="var_filename" />
       <Variable x:TypeArguments="x:String" Default="C:\Users\CabarcasJoh\Pictures\Camera Roll\" Name="var_file_root_path" />
       <Variable x:TypeArguments="x:String" Name="var_gevo_nr" />
       <Variable x:TypeArguments="x:String" Name="var_file_full_name" />
       <Variable x:TypeArguments="x:Boolean" Default="False" Name="var_is_empty" />
+      <Variable x:TypeArguments="x:String" Name="var_rows_loaded" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -88,16 +89,15 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Wait (5 min) until table rows are loaded. If table is empty set flag accordingly" BrowserType="Chrome" DisplayName="Attach Browser | Favorit table" sap:VirtualizedContainerService.HintSize="783,947" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="f6f03da7890fcf62c376d2ebcb7ffaf2" Selector="&lt;html app='chrome.exe' title='BSI CRM - KISS svc_bot_kiss01 *** 3.1.56.001 TEST ***' /&gt;">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Wait (5 min) until table rows are loaded i.e info about number of rows is given. If table is empty set flag accordingly" BrowserType="Chrome" DisplayName="Attach Browser | Favorit table" sap:VirtualizedContainerService.HintSize="708,371" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="f6f03da7890fcf62c376d2ebcb7ffaf2" Selector="&lt;html app='chrome.exe' title='BSI CRM - KISS svc_bot_kiss01 *** 3.1.56.001 TEST ***' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do | Get docs filtered" sap:VirtualizedContainerService.HintSize="526,770" sap2010:WorkflowViewState.IdRef="Sequence_16">
+          <Sequence DisplayName="Do | Get docs filtered" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_16">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="var_table_info" />
-              <Variable x:TypeArguments="x:String" Name="var_rows_loaded" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -105,7 +105,7 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" DisplayName="On Element Appear | Docs loaded" sap:VirtualizedContainerService.HintSize="484,402" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False" WaitActive="False" WaitVisible="True">
+            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" DisplayName="On Element Appear | Docs loaded" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False" WaitActive="False" WaitVisible="True">
               <ui:OnUiElementAppear.Body>
                 <Sequence DisplayName="Do | Get  nr. docs loaded" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_14">
                   <sap:WorkflowViewStateService.ViewState>
@@ -117,7 +117,7 @@
                   <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="innertext" DisplayName="Get Attribute | Nr of rows loaded" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="GetAttribute_3">
                     <ui:GetAttribute.Result>
                       <OutArgument x:TypeArguments="x:String">
-                        <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_21">var_rows_loaded</mca:CSharpReference>
+                        <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_29">var_rows_loaded</mca:CSharpReference>
                       </OutArgument>
                     </ui:GetAttribute.Result>
                     <ui:GetAttribute.Target>
@@ -135,38 +135,11 @@
               </ui:OnUiElementAppear.Target>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:OnUiElementAppear>
-            <If DisplayName="If | Table empty" sap:VirtualizedContainerService.HintSize="484,236" sap2010:WorkflowViewState.IdRef="If_1">
-              <If.Condition>
-                <InArgument x:TypeArguments="x:Boolean">
-                  <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_34">var_rows_loaded.Contains("Keine")</mca:CSharpValue>
-                </InArgument>
-              </If.Condition>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <If.Then>
-                <Assign DisplayName="Assign | table is empty" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Boolean">
-                      <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_22">var_is_empty</mca:CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Boolean">
-                      <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_35">true</mca:CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-              </If.Then>
-            </If>
           </Sequence>
         </ActivityAction>
       </ui:BrowserScope.Body>
@@ -178,10 +151,10 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:BrowserScope>
-    <If DisplayName="If | table not empty" sap:VirtualizedContainerService.HintSize="783,1664" sap2010:WorkflowViewState.IdRef="If_2">
+    <If DisplayName="If | Table empty" sap:VirtualizedContainerService.HintSize="708,905" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
-          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_38">var_is_empty == false</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_34">var_rows_loaded.Contains("Keine")</mca:CSharpValue>
         </InArgument>
       </If.Condition>
       <sap:WorkflowViewStateService.ViewState>
@@ -191,22 +164,31 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Sequence | Select doc and download it " sap:VirtualizedContainerService.HintSize="476,1506" sap2010:WorkflowViewState.IdRef="Sequence_17">
+        <Assign DisplayName="Assign | Set empty table arg" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Boolean">
+              <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">out_is_table_empty</mca:CSharpReference>
+            </OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+          </Assign.Value>
+        </Assign>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:Annotation.AnnotationText="If there is/are document(s) to print. Select it and &#xD;&#xA;download it locally " DisplayName="Sequence | Select doc and download it " sap:VirtualizedContainerService.HintSize="401,747" sap2010:WorkflowViewState.IdRef="Sequence_17">
           <Sequence.Variables>
-            <Variable x:TypeArguments="x:Boolean" Name="var_is_file_saved">
-              <Variable.Default>
-                <Literal x:TypeArguments="x:Boolean" />
-              </Variable.Default>
-            </Variable>
+            <Variable x:TypeArguments="x:Boolean" Default="False" Name="var_is_file_saved" />
             <Variable x:TypeArguments="x:String" Name="var_timestamp" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Get Name and gevor attr from doc item , select it and open save as dialog" BrowserType="Chrome" DisplayName="Attach Browser | Table favoriten" sap:VirtualizedContainerService.HintSize="434,909" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="b9f237e12186730ea76cd29795362089" Selector="&lt;html app='chrome.exe' title='BSI CRM - KISS svc_bot_kiss01*' /&gt;">
+          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Get Name and gevor attr from doc item , select it and open save as dialog" BrowserType="Chrome" DisplayName="Attach Browser | Table favoriten" sap:VirtualizedContainerService.HintSize="359,108" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="b9f237e12186730ea76cd29795362089" Selector="&lt;html app='chrome.exe' title='BSI CRM - KISS svc_bot_kiss01*' /&gt;">
             <ui:BrowserScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -290,20 +272,20 @@
             </ui:BrowserScope.Body>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:BrowserScope>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke DateTime_generate_timestamp workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="DateTime\\DateTime_generate_timestamp.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke DateTime_generate_timestamp workflow" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="DateTime\\DateTime_generate_timestamp.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <OutArgument x:TypeArguments="x:String" x:Key="out_timestamp">
                 <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_27">var_timestamp</mca:CSharpReference>
               </OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <Assign DisplayName="Assign | Full filename path" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+          <Assign DisplayName="Assign | Full filename path" sap:VirtualizedContainerService.HintSize="359,60" sap2010:WorkflowViewState.IdRef="Assign_11">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">
                 <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_28">var_file_full_name</mca:CSharpReference>
@@ -315,12 +297,12 @@
               </InArgument>
             </Assign.Value>
           </Assign>
-          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="434,61" sap2010:WorkflowViewState.IdRef="WriteLine_2">
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="359,61" sap2010:WorkflowViewState.IdRef="WriteLine_2">
             <InArgument x:TypeArguments="x:String">
               <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_46">var_file_full_name</mca:CSharpValue>
             </InArgument>
           </WriteLine>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Window_save_doc workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Window\\Window_save_doc.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Window_save_doc workflow" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Window\\Window_save_doc.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_file_full_name">
                 <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_41">var_file_full_name</mca:CSharpValue>
@@ -328,21 +310,11 @@
               <OutArgument x:TypeArguments="x:Boolean" x:Key="out_is_file_saved">
                 <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_25">var_is_file_saved</mca:CSharpReference>
               </OutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_folder_path" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_filename" />
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
-      </If.Then>
-      <If.Else>
-        <Assign DisplayName="Assign | Set empty table arg" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:Boolean">
-              <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">out_is_table_empty</mca:CSharpReference>
-            </OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
-          </Assign.Value>
-        </Assign>
       </If.Else>
     </If>
   </Sequence>
